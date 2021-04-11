@@ -1,0 +1,27 @@
+<h1 class="header">IT-Blog</h1>
+
+<button mat-button [matMenuTriggerFor]="menu" class="topic">Topic</button>
+<mat-menu #menu="matMenu" class="matMenu">
+    <div routerLinkActive="active" class="nav">
+        <a [routerLink]="['/home']">
+            <p>Home</p>
+        </a>
+    </div>
+
+    <div routerLinkActive="active" class="nav">
+        <a class="" [routerLink]="['/menu/programming-languages']">
+            <p>Languages</p>
+        </a>
+    </div>
+    <div routerLinkActive="active" class="nav">
+        <a [routerLink]="['/menu/web-framework']">
+            <p>Web Framework</p>
+        </a>
+    </div>
+    <div routerLinkActive="active" class="nav">
+        <a [routerLink]="['/menu/database']">
+            <p>Database</p>
+        </a>
+    </div>
+</mat-menu>
+

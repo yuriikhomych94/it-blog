@@ -1,0 +1,100 @@
+<button type="button" class="modalButton" (click)="openModal(template)">Create article</button>
+ 
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Create Article</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body b">
+    <form [formGroup]="form">
+
+      <div class="form">
+        <label>Title</label>
+        <input type="text" formControlName="title">
+    
+        <div class="validation" *ngIf="form.get('title').invalid && form.get('title').touched">
+          <small *ngIf="form.get('title').errors.required">
+            Title не може бути пустим
+          </small>
+          <small *ngIf="form.get('title').errors.minlength">
+            Дожина повинна бути не менше {{form.get('title').errors.minlength.requiredLength}} символів.
+            Зараз довжина становить {{form.get('title').errors.minlength.actualLength}} символів.
+          </small>
+        </div>
+      </div>
+    
+    
+    
+      <div class="form">
+        <label>Image</label>
+        <input type="text" formControlName="image">
+        <div class="validation" *ngIf="form.get('image').invalid && form.get('image').touched">
+          <small *ngIf="form.get('image').errors.required">
+            Image не може бути пустим, введіть URL картинки.
+          </small>
+        </div>
+      </div>
+    
+    
+      <div class="form">
+        <label>Text</label>
+        <textarea formControlName="text"></textarea>
+        <div class="validation" *ngIf="form.get('text').invalid && form.get('text').touched">
+          <small *ngIf="form.get('text').errors.required">
+            Text не може бути пустим
+          </small>
+          <small *ngIf="form.get('text').errors.minlength">
+            Дожина повинна бути не менше {{form.get('text').errors.minlength.requiredLength}} символів.
+            Зараз довжина становить {{form.get('text').errors.minlength.actualLength}} символів.
+          </small>
+        </div>
+      </div>
+    
+      <div class="form">
+        <label>Description</label>
+        <textarea formControlName="description"></textarea>
+        <div class="validation" *ngIf="form.get('description').invalid && form.get('description').touched">
+          <small *ngIf="form.get('description').errors.required">
+            Description не може бути пустим
+          </small>
+          <small *ngIf="form.get('description').errors.minlength">
+            Дожина повинна бути не менше {{form.get('description').errors.minlength.requiredLength}} символів.
+            Зараз довжина становить {{form.get('description').errors.minlength.actualLength}} символів.
+          </small>
+        </div>
+      </div>
+    
+      <div class="form">
+        <label>Category</label>
+        <select formControlName="topic">
+          <option *ngFor="let topic of topics" [ngValue]="topic">{{topic.name}}</option>
+        </select>
+        <div class="validation" *ngIf="form.get('topic').invalid && form.get('topic').touched">
+          <small *ngIf="form.get('topic').errors.required">
+            Виберіть тему!
+          </small>
+        </div>
+      </div>
+    
+      <button (click)="addArticle()" (click)="modalRef.hide()" class="addArticle" [disabled]="form.invalid">Add</button>
+    
+    </form>
+  </div>
+</ng-template>
+
+
+
+
+<div class="container">
+  <div class="cards" *ngFor="let article of articles">
+    <h1> {{ article.title }} </h1>
+    <img class="image" src="{{article?.image}}" alt="" class="image">
+    <h3 class="text"> {{ article.text }} </h3>
+    <button [routerLink]="['/menu/' + article.topic.name , article.id]" class="readMore">Read More</button>
+  </div>
+</div>
+
+

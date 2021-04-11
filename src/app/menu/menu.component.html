@@ -1,0 +1,12 @@
+<div class="articleName">
+    <h1>{{articleTitle | titlecase}}</h1>
+</div>
+
+<div class="container">
+    <div class="cards" *ngFor="let a of article">
+        <h1>{{a.title}}</h1>
+        <img class="image" src="{{a?.image}}" alt="" class="image">
+        <h3>{{a.text}}</h3>
+        <button [routerLink]="['/menu/' + a.topic.name , a.id]" class="readMore">Read More</button>
+    </div>
+</div>
